@@ -1,0 +1,31 @@
+CONCLUSIONES - EJERCICIO 1:
+
+HALLAZGOS
+
+1. El flujo completo se automatizo con exito: agregar MacBook e iPhone,
+   visualizar el carrito, Guest Checkout y confirmacion "Your order has been
+   placed!". Resultado final: 1 escenario, 0 fallos.
+
+2. En una ejecucion el carrito aparecio solo con el MacBook y la prueba
+   fallo. Al agregar el segundo producto, el aviso verde del primero seguia en
+   pantalla y la espera terminaba de inmediato, por lo que el test abria el
+   carrito antes de que el iPhone se registrara.
+
+3. Al finalizar la compra, la prueba leyo el titulo "Checkout" en lugar del
+   mensaje de exito, porque leyo la pagina antes de que terminara de cambiar.
+
+4. El checkout de OpenCart carga cada paso por ajax y el sitio de pruebas es
+   lento; los tiempos de espera por defecto (5 s) no alcanzaron.
+
+CONCLUSIONES
+
+- Las fallas que tuve durante el desarrollo fueron de sincronizacion y
+  no de la aplicacion: la pagina se actualiza por partes y el test actuaba
+  antes de que terminara el cambio. Se resolvieron esperando condiciones
+  concretas (el aviso con el nombre del producto, el texto final del titulo)
+  en lugar de esperar un elemento cualquiera o un tiempo fijo.
+- Con esperas explicitas de hasta 20 segundos y esas condiciones, la prueba
+  paso de forma estable en las ejecuciones finales.
+  - El flujo de compra como invitado (dos productos, carrito, Guest Checkout y
+  confirmacion) quedo automatizado de punta a punta y termina en el mensaje
+  "Your order has been placed!".
